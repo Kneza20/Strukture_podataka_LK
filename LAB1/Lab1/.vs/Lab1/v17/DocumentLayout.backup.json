@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{3CD3988F-4994-4BBF-8157-6EDF1FACC182}|Lab1\\Lab1.vcxproj|C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB1\\Lab1\\Lab1\\Zad1.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{3CD3988F-4994-4BBF-8157-6EDF1FACC182}|Lab1\\Lab1.vcxproj|solutionrelative:Lab1\\Zad1.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CD3988F-4994-4BBF-8157-6EDF1FACC182}|Lab1\\Lab1.vcxproj|C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB1\\Lab1\\Lab1\\doc.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3CD3988F-4994-4BBF-8157-6EDF1FACC182}|Lab1\\Lab1.vcxproj|solutionrelative:Lab1\\doc.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "doc.txt",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB1\\Lab1\\Lab1\\doc.txt",
+              "RelativeDocumentMoniker": "Lab1\\doc.txt",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB1\\Lab1\\Lab1\\doc.txt",
+              "RelativeToolTip": "Lab1\\doc.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-10-07T18:52:24.268Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +40,7 @@
               "RelativeDocumentMoniker": "Lab1\\Zad1.c",
               "ToolTip": "C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB1\\Lab1\\Lab1\\Zad1.c",
               "RelativeToolTip": "Lab1\\Zad1.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2025-10-07T18:32:25.345Z",
               "EditorCaption": ""
