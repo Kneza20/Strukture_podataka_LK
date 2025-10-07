@@ -1,0 +1,4 @@
+﻿  Zad1.c
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(26,5): warning C4047: '=': 'FILE *' differs in levels of indirection from 'int'
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(32,10): warning C4101: 's': unreferenced local variable
+  Lab1.vcxproj -> C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\x64\Debug\Lab1.exe
