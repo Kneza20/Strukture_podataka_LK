@@ -125,6 +125,9 @@
   <ItemGroup>
     <ClCompile Include="Zad1.c" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="doc.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
