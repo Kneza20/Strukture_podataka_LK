@@ -1,4 +1,6 @@
 ﻿  Zad1.c
-C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(26,5): warning C4047: '=': 'FILE *' differs in levels of indirection from 'int'
-C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(32,10): warning C4101: 's': unreferenced local variable
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(41,5): warning C4047: '=': 'FILE *' differs in levels of indirection from 'int'
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(50,14): warning C4477: 'fscanf' : format string '%d' requires an argument of type 'int *', but variadic argument 3 has type 'int'
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(54,5): warning C4047: '=': 'FILE *' differs in levels of indirection from 'int'
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(56,1): warning C4716: 'studentStat': must return a value
   Lab1.vcxproj -> C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\x64\Debug\Lab1.exe
