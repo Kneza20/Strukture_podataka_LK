@@ -33,12 +33,18 @@ int main() {
 	}
 
 	fp = fopen("doc.txt", "r");
+	if (fp == NULL) {
+		printf("Error while opening file!n");
+		return FILE_NOT_OPENED;
+	}
+
 	for (int z = 0; z < k; z++) {
-		fscanf(fp, "%s %s %d", s[z].name, s[z].surname, s[z].pointsNum);
+		fscanf(fp, "%s %s %d", s[z].name, s[z].surname, &s[z].pointsNum);
 	}
 	
 	for (int i = 0; i < k-1; i++) {	
-		printf("Student: %s %s, has an absolute number of points: %d, and relative number of points: %f\n", s[i].name, s[i].surname, s[i].pointsNum, (s[i].pointsNum / 100) * 100);
+		double relPoints = (s[i].pointsNum / 90.0) * 100; //relativni broj bodova
+		printf("Student: %s %s, has an absolute number of points: %d, and relative number of points: %.2f\n", s[i].name, s[i].surname, s[i].pointsNum, relPoints);
 	}
 	fp = fclose(fp);
 	free(s);
@@ -51,6 +57,23 @@ int studentNum(int i) {     //fja za prebrojavanje studenata
 	char buffer[MAX_LINE];
 	fp = fopen("doc.txt", "r");
 
+	if (fp == NULL) {
+		printf("Greska pri otvaranju datoteke.\n");
+		return FILE_NOT_OPENED;
+	}
+	else {
+		while (fgets(buffer, MAX_LINE, fp) != NULL) {
+			i = i + 1;
+		}
+		fp = fclose(fp);
+		return i;
+	}
+}
+
+int studentStats(int i) {     //fja za prebrojavanje studenata
+	FILE* fp;
+	char buffer[MAX_LINE];
+	fp = fopen("doc.txt", "r");
 	if (fp == NULL) {
 		printf("Greska pri otvaranju datoteke.\n");
 		return FILE_NOT_OPENED;
