@@ -11,20 +11,19 @@ broj bodova na kolokviju. relatvan_br_bodova = br_bodova/max_br_bodova*100*/
 #include <stdio.h>
 #include <stdlib.h>
 
+int studentNum(int i);
+
 typedef struct student {
 	char name[20];
 	char surname[20];
 	int pointsNum;
 }Student;
 
-int studentNum(int i);
-int studentStat(int studentNum, Student* s);
-
 int main() {
-	int i = 0;
+	int k = 0, n=0;
 	Student* s=NULL;
 	FILE* fp = NULL;
-	int k = studentNum(i);
+	k = studentNum(n);
 	printf("There is %d students in the file.\n", k);
 
 	s = (Student*)malloc(k * sizeof(Student));  //alokacija memorije velicine brojStud
@@ -32,16 +31,17 @@ int main() {
 		printf("Error while allocating memory!\n");
 		return ERROR_MEMMORY_ALLOCATION;
 	}
-	else {
-		fp = fopen("doc.txt", "r");
-		for (int i = 0; i < studentNum; i++) {
-			fscanf(fp, "%s %s %d", s[i].name, s[i].surname, s[i].pointsNum);
-			int relPointsNum = (s[i].pointsNum / 100) * 100;  //relativni broj bodova	
-			printf("Student: %s %s, has an absolute number of points: %d, and relative number of points: %d\n", s[i].name, s[i].surname, s[i].pointsNum, (s[i].pointsNum / 100) * 100);
-		}
-		fp = fclose(fp);
-		free(s);
+
+	fp = fopen("doc.txt", "r");
+	for (int z = 0; z < k; z++) {
+		fscanf(fp, "%s %s %d", s[z].name, s[z].surname, s[z].pointsNum);
 	}
+	
+	for (int i = 0; i < k-1; i++) {	
+		printf("Student: %s %s, has an absolute number of points: %d, and relative number of points: %f\n", s[i].name, s[i].surname, s[i].pointsNum, (s[i].pointsNum / 100) * 100);
+	}
+	fp = fclose(fp);
+	free(s);
 
 	return 0;
 }
@@ -61,23 +61,5 @@ int studentNum(int i) {     //fja za prebrojavanje studenata
 		}
 		fp = fclose(fp);
 		return i;
-	}
-}
-
-int studentStat(int studentNum, Student* s) {
-	FILE* fp;
-	s = (Student*)malloc(studentNum * sizeof(Student));  //alokacija memorije velicine brojStud
-	if (s == NULL) {
-		printf("Error while allocating memory!\n");
-		return ERROR_MEMMORY_ALLOCATION;
-	}
-	else {
-		fp = fopen("doc.txt", "r");
-		for (int i = 0; i < studentNum; i++) {
-			fscanf(fp, "%s %s %d", s[i].name, s[i].surname, s[i].pointsNum);
-			int relPointsNum = (s[i].pointsNum / 100) * 100;  //relativni broj bodova		
-		}
-		fp = fclose(fp);
-		free(s);
 	}
 }
