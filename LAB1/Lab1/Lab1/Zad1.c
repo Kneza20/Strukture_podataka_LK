@@ -69,20 +69,3 @@ int studentNum(int i) {     //fja za prebrojavanje studenata
 		return i;
 	}
 }
-
-int studentStats(int i) {     //fja za prebrojavanje studenata
-	FILE* fp;
-	char buffer[MAX_LINE];
-	fp = fopen("doc.txt", "r");
-	if (fp == NULL) {
-		printf("Greska pri otvaranju datoteke.\n");
-		return FILE_NOT_OPENED;
-	}
-	else {
-		while (fgets(buffer, MAX_LINE, fp) != NULL) {
-			i = i + 1;
-		}
-		fp = fclose(fp);
-		return i;
-	}
-}
