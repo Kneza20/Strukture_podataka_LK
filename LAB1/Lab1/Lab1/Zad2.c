@@ -53,5 +53,26 @@ int main() {
 }
 
 int addFirst(char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P) {
+	newPerson Q = NULL;
+	Q = memoryAlloc(Q);
+	Q->Next = P->Next;
+	P->Next = Q;
+	strcpy(Q->name, name);
+	strcpy(Q->surname, surname);
+	Q->yearOfBirth = yearOfBirth;
+	return EXIT_SUCCESS;
+}
 
+int addLast(char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P) {
+	newPerson Q = NULL;
+	Q = memoryAlloc(Q);
+	while (P->Next != NULL) {
+		P = P->Next;
+	}
+	Q->Next = P->Next;
+	P->Next = Q;
+	strcpy(Q->name, name);
+	strcpy(Q->surname, surname);
+	Q->yearOfBirth = yearOfBirth;
+	return EXIT_SUCCESS;
 }
