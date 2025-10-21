@@ -1,0 +1,5 @@
+﻿  Zad2.c
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB2\Lab2\Lab2\Zad2.c(59,3): warning C4047: 'return': 'newPerson' differs in levels of indirection from 'int'
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB2\Lab2\Lab2\Zad2.c(90,1): warning C4715: 'addLast': not all control paths return a value
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB2\Lab2\Lab2\Zad2.c(116,1): warning C4715: 'searchBySurname': not all control paths return a value
+  Lab2.vcxproj -> C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB2\Lab2\x64\Debug\Lab2.exe

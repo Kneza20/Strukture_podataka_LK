@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB2\\Lab2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BEB770FA-10AA-4F8A-AAEB-706240657E50}|Lab2\\Lab2.vcxproj|C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB2\\Lab2\\Lab2\\Zad2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BEB770FA-10AA-4F8A-AAEB-706240657E50}|Lab2\\Lab2.vcxproj|solutionrelative:Lab2\\Zad2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Zad2.c",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB2\\Lab2\\Lab2\\Zad2.c",
+              "RelativeDocumentMoniker": "Lab2\\Zad2.c",
+              "ToolTip": "C:\\Users\\Lenovo\\Desktop\\Luka Kne\u017Eevi\u0107 - Strukture\\LAB2\\Lab2\\Lab2\\Zad2.c",
+              "RelativeToolTip": "Lab2\\Zad2.c",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAAwH4AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-20T21:22:54.249Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,2 @@
-﻿  Zad1.c
-C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(49,5): warning C4047: '=': 'FILE *' differs in levels of indirection from 'int'
-C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\Lab1\Zad1.c(68,6): warning C4047: '=': 'FILE *' differs in levels of indirection from 'int'
-  Lab1.vcxproj -> C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\x64\Debug\Lab1.exe
+﻿Zad2.obj : error LNK2005: main already defined in Zad1.obj
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB1\Lab1\x64\Debug\Lab1.exe : fatal error LNK1169: one or more multiply defined symbols found
