@@ -18,9 +18,6 @@
     <ClCompile Include="Zad1.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Zad2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="doc.txt" />

@@ -4,7 +4,7 @@ B. dinamicki dodaje novi element ispred odredjenog elementa,
 C. sortira listu po prezimenima osoba, 
 D. upisuje listu u datoteku, 
 E. cita listu iz datoteke.*/
-#define CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #define MAX_LINE (1024)
 #define ERROR_FILE_NOT_OPENED (-1)
 #define ERROR_MEMORY_ALLOCATION (-2)
@@ -31,15 +31,15 @@ int addLast(char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPer
 
 int printOut(newPerson P);
 
-int searchBySurname(char surname[MAX_LINE], newPerson P);
+newPerson searchBySurname(char surname[MAX_LINE], newPerson P);
 
 int eraseElement(char name[MAX_LINE], char surname[MAX_LINE], newPerson P);
 
 //part of zad3
 
-int addAfter(char name[MAX_LINE], char xurname[MAX_LINE], int yearOfBirth, newPerson P);
+int addAfter(char surn[MAX_LINE], char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P);
 
-int addBefore(char name[MAX_LINE], char xurname[MAX_LINE], int yearOfBirth, newPerson P);
+int addBefore(char surn[MAX_LINE], char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P);
 
 int sortListBySurname(char surname[MAX_LINE], newPerson P);
 
@@ -60,6 +60,13 @@ int main() {
 	eraseElement("Luka", "Knezevic", head);
 	printOut(head->Next);
 
+	//part of zad3
+	writeInList(head->Next);
+	addAfter("Beslic", "Ante", "Brcic", 2005, head);
+	addBefore("Bilandzic", "Pero", "Babic", 1999, head);
+	printOut(head->Next);
+	readFromList(head->Next);
+	printOut(head->Next);
 	free(head);
 	return EXIT_SUCCESS;
 }
@@ -113,18 +120,14 @@ int printOut(newPerson P) {
 	return EXIT_SUCCESS;
 }
 
-int searchBySurname(char surname[MAX_LINE], newPerson P) {
-	while (P != NULL) {
+newPerson searchBySurname(char surname[MAX_LINE], newPerson P) {
+	while (P != NULL && strcmp(P->surname, surname) != 0) {
 		P = P->Next;
-		if (strcmp(P->surname, surname) == 0) {    // strcmp checks if two strings are equal
-			printf("Found person with surname %s: %s %s\n", surname, P->name, P->surname);
-			return EXIT_SUCCESS;
-		}
-		else if (strcmp(P->surname, surname) != 0 && P->Next == NULL) {  //strcmp checks inequality of two strings and the next argument looks for end of the list
-			printf("Person not found!\n");
-			return ERROR_PERSON_NOT_FOUND;
-		}
 	}
+	if (P == NULL) {
+		printf("Person not found!\n");
+	}
+	return P;
 }
 
 int eraseElement(char name[MAX_LINE], char surname[MAX_LINE], newPerson P) {
@@ -147,19 +150,20 @@ int eraseElement(char name[MAX_LINE], char surname[MAX_LINE], newPerson P) {
 	return EXIT_SUCCESS;
 }
 
-int addAfter(char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P) {
+int addAfter(char surn[MAX_LINE], char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P) {
 	newPerson previous = NULL;
 	newPerson Q = NULL;
 
-	previous = searchBySurname(surname, P);
+	previous = searchBySurname(surn, P);
+	if (previous == NULL) {
+		printf("Error finding person!\nb");
+		return ERROR_PERSON_NOT_FOUND;
+	}
 
 	Q = memoryAlloc();
 
-	while (P != NULL) {
-		Q->Next = previous->Next;
-		previous->Next = Q;
-	}
-
+	Q->Next = previous->Next;
+	previous->Next = Q;
 	strcpy(Q->name, name);
 	strcpy(Q->surname, surname);
 	Q->yearOfBirth = yearOfBirth;
@@ -167,23 +171,24 @@ int addAfter(char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPe
 	return EXIT_SUCCESS;
 }
 
-int addBefore(char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P) {
-	newPerson after = NULL;
+int addBefore(char surn[MAX_LINE],char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P) {
+	newPerson prev = NULL;
 	newPerson Q = NULL;
-
-	after = searchBySurname(surname, P);
-
-	Q = memoryAlloc();
-
-	while (P != NULL) {
-		Q->Next = after;
-		after->Next = Q->Next;
+	newPerson temp = P;
+	prev = searchBySurname(surn, P);
+	if (prev == NULL) {
+		printf("Person not found!\n");
+		return ERROR_PERSON_NOT_FOUND;
 	}
-
+	while (temp->Next != prev) {
+		temp = temp->Next;
+	}
+	Q = memoryAlloc();
+	Q->Next = prev;
+	temp->Next = Q;
 	strcpy(Q->name, name);
 	strcpy(Q->surname, surname);
 	Q->yearOfBirth = yearOfBirth;
-
 	return EXIT_SUCCESS;
 }
 
@@ -193,7 +198,7 @@ int sortListBySurname(char surname[MAX_LINE], newPerson P) {
 
 	Q = memoryAlloc();
 
-	if (strcmp(P->surname, surname) > 0) {
+	if (strcmp(P->surname, P->Next->surname) > 0) {
 		temp = P->Next;
 		Q->Next = temp;
 		P->Next = temp->Next;
@@ -201,16 +206,40 @@ int sortListBySurname(char surname[MAX_LINE], newPerson P) {
 	}
 }
 
-//D) otvaranje dokumenta -> fprintf(...) -> fclose(...)
-//E) otvaranje dokumenta -> fscanf(...) -> fclose(...)
+int writeInList(newPerson P) {
+	FILE* fp=NULL;
+	fp = fopen("list.txt", "w");
+	if (fp == NULL) {
+		printf("File didn't open!\n");
+		return ERROR_FILE_NOT_OPENED;
+	}
+	while (P != NULL) {
+		fprintf(fp, "%s %s %d", P->name, P->surname, P->yearOfBirth);
+		if (P->Next == NULL) {
+			fprintf(fp, "\n");
+		}
+		P = P->Next;
+	}
 
-/*q=head
-  p=head->Next
-  newPerson sorted=NULL
-  strcmp(p->lastName, p->Next->lastName)>0 --> uvjet if petlje
-  temp = p->Next
-  q->Next = temp
-  p->Next = temp->Next
-  temp->Next = p
-  p=p->Next
-  q=q->Next*/
+	fclose(fp);
+	printf("Data has been inserted!\n");
+	return EXIT_SUCCESS;
+}
+
+int readFromList(newPerson P) {
+	FILE* fp;
+	char name[MAX_LINE], surname[MAX_LINE];
+	int yearOfBirth = 0;
+	fp = fopen("list.txt", "w");
+	if (fp == NULL) {
+		printf("File didn't open!\n");
+		return ERROR_FILE_NOT_OPENED;
+	}
+	while (fp != NULL) {
+		fscanf(fp, "%s %s %d", P->name, P->surname, P->yearOfBirth);
+		addLast(P->name, P->surname, P->yearOfBirth, P);
+	}
+
+	fclose(fp);
+	return EXIT_SUCCESS;
+}

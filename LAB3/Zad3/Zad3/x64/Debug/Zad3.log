@@ -1,0 +1,7 @@
+﻿  Zad3.c
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB3\Zad3\Zad3\Zad3.c(78,3): warning C4047: 'return': 'newPerson' differs in levels of indirection from 'int'
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB3\Zad3\Zad3\Zad3.c(239,14): warning C4477: 'fscanf' : format string '%d' requires an argument of type 'int *', but variadic argument 3 has type 'int'
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB3\Zad3\Zad3\Zad3.c(231,7): warning C4101: 'name': unreferenced local variable
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB3\Zad3\Zad3\Zad3.c(231,23): warning C4101: 'surname': unreferenced local variable
+C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB3\Zad3\Zad3\Zad3.c(207,1): warning C4716: 'sortListBySurname': must return a value
+  Zad3.vcxproj -> C:\Users\Lenovo\Desktop\Luka Knežević - Strukture\LAB3\Zad3\x64\Debug\Zad3.exe

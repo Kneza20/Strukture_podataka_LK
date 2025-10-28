@@ -124,7 +124,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Zad1.c" />
-    <ClCompile Include="Zad2.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="doc.txt" />
