@@ -41,7 +41,7 @@ int addAfter(char surn[MAX_LINE], char name[MAX_LINE], char surname[MAX_LINE], i
 
 int addBefore(char surn[MAX_LINE], char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P);
 
-int sortListBySurname(char surname[MAX_LINE], newPerson P);
+int sortListBySurname(newPerson P);
 
 int writeInList(newPerson P);
 
@@ -61,13 +61,14 @@ int main() {
 	printOut(head->Next);
 
 	//part of zad3
-	writeInList(head->Next);
 	addAfter("Beslic", "Ante", "Brcic", 2005, head);
-	addBefore("Bilandzic", "Pero", "Babic", 1999, head);
+	addBefore("Bilandzic", "Kreso", "Stojic", 1990, head);
+	writeInList(head->Next);
+	readFromList(head);
+	printf("Sorted list: \n");
+	sortListBySurname(head);
+	writeInList(head->Next);
 	printOut(head->Next);
-	readFromList(head->Next);
-	printOut(head->Next);
-	free(head);
 	return EXIT_SUCCESS;
 }
 
@@ -96,7 +97,7 @@ int addFirst(char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPe
 
 int addLast(char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P) {
 	newPerson Q = NULL;
-	Q = memoryAlloc(Q);
+	Q = memoryAlloc();
 	while (P->Next != NULL) {           //
 		P = P->Next;                    //ensuring that we are at the end of list
 	}
@@ -139,6 +140,8 @@ int eraseElement(char name[MAX_LINE], char surname[MAX_LINE], newPerson P) {
 		if (strcmp(P->name, name) == 0 && strcmp(P->surname, surname) == 0) {
 			Q->Next = P->Next;
 			P->Next = NULL;
+
+			free(P);
 			return EXIT_SUCCESS;
 		}
 	}
@@ -147,8 +150,11 @@ int eraseElement(char name[MAX_LINE], char surname[MAX_LINE], newPerson P) {
 		printf("Person not found!\n");
 		return ERROR_PERSON_NOT_FOUND;
 	}
+
 	return EXIT_SUCCESS;
 }
+
+// zad 3
 
 int addAfter(char surn[MAX_LINE], char name[MAX_LINE], char surname[MAX_LINE], int yearOfBirth, newPerson P) {
 	newPerson previous = NULL;
@@ -192,22 +198,33 @@ int addBefore(char surn[MAX_LINE],char name[MAX_LINE], char surname[MAX_LINE], i
 	return EXIT_SUCCESS;
 }
 
-int sortListBySurname(char surname[MAX_LINE], newPerson P) {
-	newPerson temp = NULL;
-	newPerson Q = NULL;
+int sortListBySurname(newPerson P) {
+	newPerson Q, prev, temp, end = NULL;
 
-	Q = memoryAlloc();
-
-	if (strcmp(P->surname, P->Next->surname) > 0) {
-		temp = P->Next;
-		Q->Next = temp;
-		P->Next = temp->Next;
-		temp->Next = P;
+	while (P->Next != end) {
+		prev = P;
+		Q = P->Next;
+		while (Q->Next != end) {
+			if (strcmp(Q->surname, Q->Next->surname) > 0) {
+				temp = Q->Next;
+				prev->Next = temp;
+				Q->Next = temp->Next;
+				temp->Next = Q;
+				prev = temp;
+			}
+			else {
+				prev = Q;
+				Q = Q->Next;
+			}
+		}
+		end = Q;
 	}
+
+	return EXIT_SUCCESS;
 }
 
 int writeInList(newPerson P) {
-	FILE* fp=NULL;
+	FILE *fp=NULL;
 	fp = fopen("list.txt", "w");
 	if (fp == NULL) {
 		printf("File didn't open!\n");
@@ -215,7 +232,7 @@ int writeInList(newPerson P) {
 	}
 	while (P != NULL) {
 		fprintf(fp, "%s %s %d", P->name, P->surname, P->yearOfBirth);
-		if (P->Next == NULL) {
+		if (P->Next != NULL) {
 			fprintf(fp, "\n");
 		}
 		P = P->Next;
@@ -230,14 +247,14 @@ int readFromList(newPerson P) {
 	FILE* fp;
 	char name[MAX_LINE], surname[MAX_LINE];
 	int yearOfBirth = 0;
-	fp = fopen("list.txt", "w");
+	fp = fopen("list.txt", "r");
 	if (fp == NULL) {
 		printf("File didn't open!\n");
 		return ERROR_FILE_NOT_OPENED;
 	}
-	while (fp != NULL) {
-		fscanf(fp, "%s %s %d", P->name, P->surname, P->yearOfBirth);
-		addLast(P->name, P->surname, P->yearOfBirth, P);
+	while (!feof(fp)) {
+		(void)fscanf(fp, "%s %s %d", name, surname, &yearOfBirth);
+		addLast(name, surname, yearOfBirth, P);
 	}
 
 	fclose(fp);
