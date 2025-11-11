@@ -1,70 +1,85 @@
-﻿/*5. Napisati program koji iz datoteke čita postfiks izraz i zatim 
-korištenjem stoga računa rezultat. 
+﻿/*5. Napisati program koji iz datoteke cita postfiks izraz i zatim koristenjem stoga racuna rezultat.
 Stog je potrebno realizirati preko vezane liste.*/
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_LINE 1024
-#define ERROR_ALLOCATING_MEMORY (-1)
+#define ERROR_ALLOCATION (-1)
+#define ERROR_EMPTY_STACK (-2)
+#define ERROR_DIVIDING (-3)
+#define ERROR_OPERAND (-4)
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct postfix* Position;
 
 typedef struct postfix {
-	double number;
+	int number;
 	Position Next;
 }post;
 
-int Push(Position P, double num);
+Position memoryAlloc();
 
-int Pop(Position first, Position second);
+int push(Position P, int num);
 
-int isFull(Position P);
+int pop(Position P, int num);
+
+int calculate(int first, int second, char operand);
 
 int main() {
-	Position head=NULL;
-	head = memoryAlloc();
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 Position memoryAlloc() {
-	Position P = malloc(sizeof(Position));
-	if (P == NULL) {
-		pritntf("Error allocating memory!\n");
-		return ERROR_ALLOCATING_MEMORY;
+	Position Q = NULL;
+	Q = (Position)malloc(sizeof(post));
+	if (Q == NULL) {
+		printf("Error allocating memory");
+		return ERROR_ALLOCATION;
 	}
 }
 
-int Push(Position P, double num) {
-	Position Q = P;                 //spremanje adrese heada u pomocnu varijablu q
-	Position newEl = NULL;          
-	newEl = memoryAlloc();
-	newEl->number = num;
-	newEl->Next = NULL;
+int push(Position P, int num) {
+	Position newElement = NULL;
+	newElement = memoryAlloc();
 
-	newEl->Next = Q->Next;
-	Q->Next = newEl;
+	newElement->number = num;       //spremanje novog elementa na stog
+	newElement->Next = P;
+
+	return newElement;
 }
 
-int Pop(Position first, Position second) {
-	Position Q = memoryAlloc();
-	first = Q->Next;
-	second = first->Next;
+int pop(Position P, int num) {
+	if (P == NULL) {
+		printf("Stack is empty!");
+		return ERROR_EMPTY_STACK;
+	}
+
+	Position temp = P; //trenutni vrh stoga spremamo u varijablu temp
+	P = P->Next;       //pomicanje na sljedeći element stoga
+	free(temp);		   //brisanje prethodnog vrha stoga
+	return P;
 }
 
+int calculate(int first, int second, char operand) {
+	switch (operand) {
+	case '+': return first + second;
+	case '-': return first - second;
+	case '*': return first * second;
+	case '/':
+		if (second = 0) {
+			printf("Can not divide by zero!\n");
+			return ERROR_DIVIDING;
+		}
+		else {
+			return first / second;
+		}
 
-//učitati datoteku
-//pohranit podatke
-//zatvoriti datoteku
+	default:
+		printf("Unknown operand!\n");
+		return ERROR_OPERAND;
+	}
 
-//broj -> push
-//operator -> pop
-//trash
 
-//POP
-//q->Next = second->Next
-//first->Next = NULL, second->Next = NULL
-//free(first)
-//free(second)
-//Push(&head, rezultat)
+}
