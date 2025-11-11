@@ -6,6 +6,7 @@ Stog je potrebno realizirati preko vezane liste.*/
 #define ERROR_EMPTY_STACK (-2)
 #define ERROR_DIVIDING (-3)
 #define ERROR_OPERAND (-4)
+#define ERROR_FILE_OPENING (-5)
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,24 +16,22 @@ Stog je potrebno realizirati preko vezane liste.*/
 typedef struct postfix* Position;
 
 typedef struct postfix {
-	int number;
+	double number;
 	Position Next;
 }post;
 
 Position memoryAlloc();
 
-Position push(Position P, int num);
+Position push(Position P, double num);
 
-int pop(Position P);
+Position pop(Position P, double* result);
 
-int calculate(Position P);
+double calculate(Position P);
 
 int main() {
 	Position P = NULL;
 	P = memoryAlloc();
-	int result = 0;
-	result = calculate(P);
-	printf("Result of postfix equation is: %d", result);
+	printf("Result of postfix equation is: %.2lf\n", calculate(P));
 
 	return EXIT_SUCCESS;
 }
@@ -47,46 +46,50 @@ Position memoryAlloc() {
 	return Q;
 }
 
-Position push(Position P, int num) {
+Position push(Position P, double num) {
 	Position newElement = NULL;
 	newElement = memoryAlloc();
 
 	newElement->number = num;       //spremanje novog elementa na stog
-	newElement->Next = P;
+	newElement->Next = P;			//pomicanje na sljedeci element koji se dodaje na stog
 
 	return newElement;
 }
 
-int pop(Position P) {
+Position pop(Position P, double* result) {
 	if (P == NULL) {
 		printf("Stack is empty!");
 		return ERROR_EMPTY_STACK;
 	}
 
-	int num = (P)->number;
-	Position temp = P;
-	P = P->Next;
-	free(temp);
-	return num;
+	*result = P->number;			//spremanje trenutnog vrha stoga na rezultat
+	Position temp = P;				
+	P = P->Next;					//prebacivanje na sljedeci element stoga
+	free(temp);						//oslobadjanje prethodnog elementa sa vrha stoga
+	return P;
 }
 
-int calculate(Position P) {
+double calculate(Position P) {
 	int i = 0;
 	FILE* fp = NULL;
 	fp = fopen("dat.txt", "r");
+
+	if (fp == NULL) {
+		printf("Error opening file!\n");
+		return ERROR_FILE_OPENING;
+	}
 
 	char buffer[MAX_LINE];
 
 	while (fscanf(fp,"%s",buffer)==1) {
 		if (isdigit(buffer[0]) || (buffer[0] == '-' && isdigit(buffer[0]))) {    //uvjet za provjeravanje da li je element broj i to da li je poz ili neg
-			int number;
-			number = buffer[i];
-			P = push(P, number);
+			double number = atof(buffer);   //atof funkcija uzima brojcanu vrijednost iz stringa
+			P = push(P, number);			//dodavanje broja na stog
 		}
 		else {
-			int result = 0;
-			int first = pop(P);
-			int second = pop(P);
+			double result = 0, first = 0, second = 0;
+			P = pop(P, &first);				//izbacivanje prvog zadnjeg dodanog elementa
+			P = pop(P, &second);			//izbacivanje elementa koji se nalazi prije first elementa
 
 			switch (buffer[0]) {
 			case '+': result = second + first; break;
@@ -108,11 +111,12 @@ int calculate(Position P) {
 			}
 			P = push(P, result);
 		}
-		i++;
 	}
 	fclose(fp);
 
-	int finalResult = pop(P);
+	double finalResult = 0;
+
+	P = pop(P, &finalResult);  //funkcija u finalResult sprema finalni rezultat računanja izraza na stogu
 
 	return finalResult;
 }
