@@ -34,7 +34,7 @@ int Multiplication(Position FirstP, Position SecondP, Position MultResult);
 
 int printPoly(Position Q);
 
-void freePoly(Position Q);
+int freePoly(Position Q);
 
 int main() {
 	polynome FirstP, SecondP, result;
@@ -204,7 +204,7 @@ int printPoly(Position Q)
 	return EXIT_SUCCESS;
 }
 
-void freePoly(Position Q) {
+int freePoly(Position Q) {
 	Position temp = Q->Next;
 	Position deleteEl = NULL;
 	while (temp != NULL) {
@@ -213,4 +213,6 @@ void freePoly(Position Q) {
 		free(deleteEl);
 	}
 	Q->Next = NULL;
+
+	return EXIT_SUCCESS;
 }
