@@ -33,6 +33,7 @@ int main() {
 	P = memoryAlloc();
 	printf("Result of postfix equation is: %.2lf\n", calculate(P));
 
+	free(P);
 	return EXIT_SUCCESS;
 }
 
@@ -65,6 +66,7 @@ Position pop(Position P, double* result) {
 	*result = P->number;			//spremanje trenutnog vrha stoga na rezultat
 	Position temp = P;				
 	P = P->Next;					//prebacivanje na sljedeci element stoga
+	temp->Next = NULL;				//potrebno je iduci element postaviti na NULL kako ne bi ostao visiti u memoriji
 	free(temp);						//oslobadjanje prethodnog elementa sa vrha stoga
 	return P;
 }
