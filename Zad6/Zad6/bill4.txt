@@ -1,0 +1,5 @@
+2022-09-07
+Oil_5W40_1L 2 20.44
+Battery_75Ah 1 350.00
+Brake_pads_pair 2 81.00
+Brake_fluid_1L 1 12.50
