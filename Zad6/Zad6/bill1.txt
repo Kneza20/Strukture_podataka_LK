@@ -1,5 +1,0 @@
-2025-02-21
-Oil_filter 1 15.30
-Air_filter 1 22.50
-Oil_5W40_5L 1 32.65
-Cabin_filter 1 18.20

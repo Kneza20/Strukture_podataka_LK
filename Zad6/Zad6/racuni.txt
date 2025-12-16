@@ -1,4 +1,0 @@
-bill1.txt
-bill2.txt
-bill3.txt
-bill4.txt
