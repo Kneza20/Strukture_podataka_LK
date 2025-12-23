@@ -1,0 +1,3 @@
+﻿  Zad9.c
+C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB9\Zad9\Zad9\Zad9.c(37,8): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Zad9.vcxproj -> C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB9\Zad9\x64\Debug\Zad9.exe
