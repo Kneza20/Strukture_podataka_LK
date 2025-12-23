@@ -1,0 +1,5 @@
+﻿  Functions.c
+C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB8\Zad8\Zad8\Functions.c(133,3): warning C4033: 'trLevelOrder' must return a value
+C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB8\Zad8\Zad8\Functions.c(146,1): warning C4715: 'trLevelOrder': not all control paths return a value
+C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB8\Zad8\Zad8\Functions.c(165,1): warning C4716: 'levelOrder': must return a value
+  Zad8.vcxproj -> C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB8\Zad8\x64\Debug\Zad8.exe
