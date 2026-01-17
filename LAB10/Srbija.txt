@@ -1,3 +1,0 @@
-Beograd,200000
-Pozarevac,10000
-Pristina,300000
