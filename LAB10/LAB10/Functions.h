@@ -16,7 +16,7 @@ typedef struct StateTree* StateTPosition;
 
 typedef struct StateTree {
 	char stateName[MAX_LINE];
-	TownLPosition Town;
+	TownTPosition Town;
 	StateTPosition left;
 	StateTPosition right;
 }StateTree;
@@ -34,7 +34,11 @@ typedef struct TownList {
 	TownLPosition Next;
 }TownList;
 
-TownLPosition memoryAllocTT();
+TownTPosition memoryAllocTT();
+
+StateTPosition memoryAllocST();
+
+StateLPosition memoryAllocSL();
 
 TownTPosition createTownT(char* name, int townPopulation);
 
@@ -42,10 +46,20 @@ TownTPosition addTownT(char* name, int population, TownTPosition root);
 
 StateLPosition addStateL(char* name, StateLPosition Q, char* stateFile);
 
+StateTPosition addStateT(char* stateName, char* stateFile, StateTPosition root);
+
+StateTPosition createStateT(char* stateName, char* stateFile);
+
 TownTPosition readTowns(char* stateFile);
 
 int printLStates(StateLPosition Q);
 
 int printTTowns(TownTPosition root);
+
+int printTStates(StateTPosition root);
+
+StateLPosition findState(StateLPosition Q, char* stateName);
+
+int findTowns(TownTPosition root, int minPopulation);
 
 #endif

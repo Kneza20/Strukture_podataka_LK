@@ -1,4 +1,2 @@
 ﻿  Zad10.c
-C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB9\LAB10\LAB10\Zad10.c(17,25): warning C4133: 'function': incompatible types - from 'StateLPosition' to 'char *'
-C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB9\LAB10\LAB10\Zad10.c(17,36): warning C4133: 'function': incompatible types - from 'char [1024]' to 'StateLPosition'
   LAB10.vcxproj -> C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB9\LAB10\x64\Debug\LAB10.exe

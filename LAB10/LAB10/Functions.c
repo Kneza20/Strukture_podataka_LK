@@ -1,10 +1,10 @@
 #include "Define.h"
 #include "Functions.h"
 
-TownLPosition memoryAllocTT() {
+TownTPosition memoryAllocTT() {
 	TownTPosition Q = (TownTPosition)malloc(sizeof(TownTree));
 	if (Q == NULL) {
-		printf("Error allocating TownTree memory!");
+		printf("Error allocating TownTree memory!\n");
 		return NULL;
 	}
 	return Q;
@@ -13,9 +13,19 @@ TownLPosition memoryAllocTT() {
 StateLPosition memoryAllocSL() {
 	StateLPosition Q = (StateLPosition)malloc(sizeof(StateList));
 	if (Q == NULL) {
-		printf("Error allocating TownTree memory!");
+		printf("Error allocating TownTree memory!\n");
 		return NULL;
 	}
+	return Q;
+}
+
+StateTPosition memoryAllocST() {
+	StateTPosition Q = (StateTPosition)malloc(sizeof(StateTree));
+	if (Q == NULL) {
+		printf("Error allocating state tree!\n");
+		return NULL;
+	}
+
 	return Q;
 }
 
@@ -40,6 +50,8 @@ TownTPosition addTownT(char* name, int population, TownTPosition root) {
 	else {
 		root->right = addTownT(name, population, root->right);
 	}
+
+	return root;
 }
 
 StateLPosition addStateL(char* name, StateLPosition Q, char* stateFile) {
@@ -62,6 +74,8 @@ StateLPosition addStateL(char* name, StateLPosition Q, char* stateFile) {
 		temp = temp->Next;
 	}
 
+	fclose(fp);
+
 	state->Next = temp->Next;
 	temp->Next = state;
 
@@ -74,7 +88,7 @@ TownTPosition readTowns(char* stateFile) {
 
 	if (fp == NULL) {
 		printf("Error while opening file!");
-		return ERROR_FILE;
+		return NULL;
 	}
 
 	TownTPosition root = NULL;
@@ -90,7 +104,7 @@ TownTPosition readTowns(char* stateFile) {
 
 int printLStates(StateLPosition Q) {
 	while (Q) {
-		printf("%s\n", Q->stateName);
+		printf("%s:\n", Q->stateName);
 		printTTowns(Q->Town);
 		Q = Q->Next;
 	}
@@ -99,8 +113,69 @@ int printLStates(StateLPosition Q) {
 }
 
 int printTTowns(TownTPosition root) {
+	if (root == NULL) {
+		return 0;
+	}
 	printTTowns(root->left);
-	printf(" %[^,],%d", root->townName, root->townPopulation);
+	printf(" %s,%d\n", root->townName, root->townPopulation);
 	printTTowns(root->right);
+
+	return 0;
 }
 
+int printTStates(StateTPosition root) {
+	if (root == NULL) {
+		return 0;
+	}
+	printTStates(root->left);
+	printf("%s\n", root->stateName);
+	printTStates(root->right);
+
+	return 0;
+}
+
+StateTPosition createStateT(char* stateName, char* stateFile) {
+	StateTPosition Q = memoryAllocST();
+
+	strcpy(Q->stateName, stateName);
+	Q->Town = readTowns(stateFile);
+	Q->left = NULL;
+	Q->right = NULL;
+
+	return Q;
+}
+
+StateTPosition addStateT(char* stateName, char* stateFile, StateTPosition root) {
+	if (root == NULL) {
+		return createStateT(stateName, stateFile);
+	}
+
+	if (strcmp(stateName, root->stateName) < 0) {
+		root->left = addStateT(stateName, stateFile, root->left);
+	}
+	else {
+		root->right = addStateT(stateName, stateFile, root->right);
+	}
+
+	return root;
+}
+
+StateLPosition findState(StateLPosition Q, char* stateName) {
+	while (Q && strcmp(Q->stateName, stateName) != 0) {
+		Q = Q->Next;
+	}
+
+	return Q;
+}
+
+int findTowns(TownTPosition root, int minPopulation) {
+	if (root == NULL) {
+		return 0;
+	}
+
+	findTowns(root->left, minPopulation);
+	if (root->townPopulation > minPopulation) {
+		printf(" %s / %d\n", root->townName, root->townPopulation);
+	}
+	findTowns(root->right, minPopulation);
+}

@@ -1,3 +1,3 @@
 Split,100000
-KaštilaCity,20000
+KastilaCity,20000
 Trogir,10000
