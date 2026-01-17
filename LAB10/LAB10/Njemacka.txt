@@ -1,2 +1,0 @@
-Munchen,300000
-Berlin,1900000
