@@ -1,3 +1,0 @@
-Rim,100000
-Firenza,50000
-Napoli,60000
