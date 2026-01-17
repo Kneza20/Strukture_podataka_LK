@@ -1,0 +1,5 @@
+﻿  Functions.c
+  Zad10.c
+  Generating Code...
+C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB10\LAB10\Functions.c(187,1): warning C4715: 'findTowns': not all control paths return a value
+  LAB10.vcxproj -> C:\Users\Luka\Desktop\Strukture_podataka_LK-main\LAB10\x64\Debug\LAB10.exe
