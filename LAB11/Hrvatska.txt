@@ -1,0 +1,3 @@
+Split,100000
+KastilaCity,20000
+Trogir,10000
